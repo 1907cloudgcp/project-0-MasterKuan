@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-from main.python.com.revature.controller.redirector import *
 
-
+'''
+This is your main script, this should call several other scripts within your packages.
+'''
 def main():
-	main_menu()
+	print('TO-DO')
 
 if __name__ == '__main__':
 	main()
