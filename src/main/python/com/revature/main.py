@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from main.python.com.revature.controller.redirector import *
+from controller.redirector import *
 
 
 def main():
