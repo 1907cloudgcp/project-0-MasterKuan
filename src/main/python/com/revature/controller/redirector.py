@@ -1,4 +1,20 @@
-from service.loginservice import login
+from service.loginservice import *
+
+
+def run(sock):
+    connect_server(sock)
+
+    while True:
+        action = main_menu()
+        if action == 0:
+            break
+        elif action == 1:
+            print(sock.sendall("Register account!"))
+        elif action == 2:
+            username = input("Username: ")
+            password = input("Password: ")
+            login(username, password)
+
 
 def main_menu():
     while True:
@@ -10,13 +26,14 @@ def main_menu():
         action = parse(0, user_input)
 
         if action == 0:
-            break
+            return 0
         elif action == 1:
-            print("Register success")
+            print("Register new account:")
+            return 1
         elif action == 2:
-            username = input("Username: ")
-            password = input("Password: ")
-            login(username, password)
+            print("Login:")
+            return 2
+
 
 def account_menu():
     while True:
@@ -29,8 +46,8 @@ def account_menu():
         if not parse(1, user_input):
             break
 
-def parse(menu, action):
 
+def parse(menu, action):
     if (action == "exit"):
         print("Exiting")
         return 0
