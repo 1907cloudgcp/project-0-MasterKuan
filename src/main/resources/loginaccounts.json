@@ -1,3 +1,7 @@
-{
-  "Ryan" : { "salt":"abc123", "password": "cc7666e2dea4b1cdbb53fc0294e7d7a722a9586e3b28a5ab99bb898a3662c16f" }
-}
+[
+    {
+        "username": "Ryan",
+        "salt": "skVJ31MuWqvmuIRE",
+        "password": "33f2e27f5f982ec097ea528716ccc418bbf4b8a11786ea03672cffacee29331c"
+    }
+]

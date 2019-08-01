@@ -9,19 +9,20 @@ def login_attempt(info):
     login_info = info.split()
 
     try:
-        data = json.loads(open(resources+"loginaccounts.json").read())
-
-        try:
-            account = data[login_info[0]]
-            if sha256((login_info[1]+account["salt"]).encode('ascii')).hexdigest() == account["password"]:
-                print("Login success")
-                return 1
-            else:
-                print("Incorrect password")
-                return 0
-        except KeyError:
+        with open(resources + "loginaccounts.json", 'r') as f:
+            data = json.load(f)
+            for acc in data:
+                if acc["username"] == login_info[0]:
+                    if sha256((login_info[1] + acc["salt"]).encode('ascii')).hexdigest() == acc["password"]:
+                        print("Login success")
+                        f.close()
+                        return 1
+                    else:
+                        print("Incorrect password")
+                        f.close()
+                        return 0
             print("Account doesn't exist")
-            return 0
+        return 0
     except FileNotFoundError:
         print("File loginaccounts.json is missing.")
         return 0

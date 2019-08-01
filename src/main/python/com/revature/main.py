@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 import socket
-from controller.redirector import *
 from service.client import connect
+from controller.redirector import run
 
 
 def main():
 	sock = connect()
 	if sock:
-		redirector_connect_server(sock)
-		run()
+		run(sock)
 		sock.shutdown(socket.SHUT_RDWR)
 		sock.close()
 

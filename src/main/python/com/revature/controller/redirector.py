@@ -1,15 +1,17 @@
 from service.loginservice import *
+from service.createaccount import *
 
 server = None
+
+
+def run(sock):
+    redirector_connect_server(sock)
+    run_main_menu()
 
 
 def redirector_connect_server(sock):
     global server
     server = sock
-
-
-def run():
-    run_main_menu()
 
 
 def run_main_menu():
@@ -18,7 +20,8 @@ def run_main_menu():
         if action == 0:
             break
         elif action == 1:
-            print(server.sendall("Register account!"))
+            create_account_connect_server(server)
+            create_new_account()
         elif action == 2:
             login_connect_server(server)
             if login_service():
@@ -43,7 +46,6 @@ def main_menu():
         if action == 0:
             return 0
         elif action == 1:
-            print("Register new account:")
             return 1
         elif action == 2:
             return 2
