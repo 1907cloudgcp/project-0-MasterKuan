@@ -1,0 +1,27 @@
+[
+    {
+        "account": 1,
+        "balance": 100.0,
+        "transactions": [
+            [
+                "Deposit",
+                100.0
+            ]
+        ]
+    },
+    {
+        "account": 2,
+        "balance": 200.0,
+        "transactions": [
+            [
+                "Deposit",
+                200.0
+            ]
+        ]
+    },
+    {
+        "account": 3,
+        "balance": 0.0,
+        "transactions": []
+    }
+]

@@ -2,14 +2,14 @@ import json
 from hashlib import sha256
 
 # I hate this
-resources = "../../../../resources/"
+login_accounts = "../../../../resources/loginaccounts.json"
 
 
 def login_attempt(info):
     login_info = info.split()
 
     try:
-        with open(resources + "loginaccounts.json", 'r') as f:
+        with open(login_accounts, 'r') as f:
             data = json.load(f)
             for acc in data:
                 if acc["username"] == login_info[0]:
