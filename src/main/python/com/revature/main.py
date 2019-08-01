@@ -7,7 +7,8 @@ from service.client import connect
 def main():
 	sock = connect()
 	if sock:
-		run(sock)
+		redirector_connect_server(sock)
+		run()
 		sock.shutdown(socket.SHUT_RDWR)
 		sock.close()
 

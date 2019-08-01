@@ -1,27 +1,31 @@
 from hashlib import sha256
+import pickle
 
-connection = None
-
-
-def connect_server(sock):
-    global connection
-    connection = sock
+server = None
 
 
-def login(username, password):
+def login_connect_server(sock):
+    global server
+    server = sock
+
+
+def login_service():
+    username = input("Username: ")
+    password = input("Password: ")
+
     hashed_password = sha256(password.encode('ascii')).hexdigest()
-    print("User: " + username)
-    print("Hashed password: " + hashed_password)
-    send_info(username, hashed_password)
+    success = send_info(username + " " + hashed_password)
+
+    if success:
+        print("Login successful")
+        return 1
+    else:
+        print("Login unsuccessful")
+        return 0
 
 
-def send_info(username, password):
-    connection.sendall(username.encode())
-
-    #Confirm username recieved
-    print(connection.recv(1024).decode())
-
-    connection.sendall(password.encode())
-
-    #Confirm password recieved
-    print(connection.recv(1024).decode())
+def send_info(info):
+    login_package = pickle.dumps(("login", info))
+    server.sendall(login_package)
+    success = server.recv(1024)
+    return int(success.decode('utf8'))
