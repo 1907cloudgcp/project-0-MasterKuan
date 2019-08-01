@@ -1,3 +1,5 @@
+from service.loginservice import login
+
 def main_menu():
     while True:
         print("Actions:\n"
@@ -14,7 +16,7 @@ def main_menu():
         elif action == 2:
             username = input("Username: ")
             password = input("Password: ")
-            print("Logging in as " + username)
+            login(username, password)
 
 def account_menu():
     while True:
