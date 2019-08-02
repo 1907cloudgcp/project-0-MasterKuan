@@ -3,6 +3,7 @@ import pickle
 from loginauthenticator import login_attempt
 from accountcreator import create_account_attempt
 from deposit import deposit_to_account
+from withdraw import withdraw_from_account
 
 
 def main():
@@ -46,6 +47,9 @@ def data_parse(connection, data):
         connection.sendall(str(success).encode('utf8'))
     elif flag == "deposit":
         success = deposit_to_account(data[1])
+        connection.sendall(str(success).encode('utf8'))
+    elif flag == "withdraw":
+        success = withdraw_from_account(data[1])
         connection.sendall(str(success).encode('utf8'))
     else:
         print("Unhandled flag")

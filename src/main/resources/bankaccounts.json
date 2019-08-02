@@ -1,22 +1,14 @@
 [
     {
         "account": 1,
-        "balance": "533.33",
+        "balance": "400.0",
         "transactions": [
             [
                 "Deposit",
-                "100.00"
-            ],
-            [
-                "Deposit",
                 "400.00"
-            ],
-            [
-                "Deposit",
-                "33.33"
             ]
         ],
-        "session": "nex1n370QT2BdqDV"
+        "session": "X9FGvufEBTHSGo3U"
     },
     {
         "account": 2,

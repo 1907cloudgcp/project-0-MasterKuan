@@ -1,5 +1,5 @@
 from service.accountdeposit import deposit_service
-from service.accountwithdraw import *
+from service.accountwithdraw import withdraw_service
 from service.viewtransactions import *
 
 
@@ -13,7 +13,7 @@ def run_account_menu(session):
         elif action == 1:
             deposit_service(session)
         elif action == 2:
-            break
+            withdraw_service(session)
         elif action == 3:
             break
         elif action == 4:
