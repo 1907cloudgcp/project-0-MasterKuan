@@ -7,17 +7,21 @@ from withdraw import withdraw_from_account
 from balance import view_balance
 from transactions import view_transactions
 
+PORT = 10000
+
 
 def main():
-    start_server()
+    run_server()
 
 
-def start_server():
+def run_server():
+    global PORT
+
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    server_address = ('localhost', 10000)
+    server_address = ('localhost', PORT)
     sock.bind(server_address)
     sock.listen(1)
+
     while True:
         connection, client_address = sock.accept()
         try:
@@ -31,11 +35,11 @@ def start_server():
                     break
 
         finally:
-            print("Disconnected")
+            print("Client disconnected")
             connection.close()
             break
 
-    print("Shutting down")
+    print("Server shutting down")
     sock.close()
 
 

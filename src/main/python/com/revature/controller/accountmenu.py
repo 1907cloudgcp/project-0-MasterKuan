@@ -32,7 +32,7 @@ def account_menu():
               "    0) Logout")
         user_input = input("Input: ").lower()
         action = parse_account_menu(user_input)
-        if not action == 5:
+        if not action == 999:
             return action
 
 
@@ -54,4 +54,4 @@ def parse_account_menu(action):
         return 4
     else:
         print("\nInput was not recognized.")
-        return 5
+        return 999

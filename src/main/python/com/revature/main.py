@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import socket
 from service.client import connect
 from controller.run import run_app
 from service.createaccount import create_account_connect_server
@@ -20,7 +19,6 @@ def main():
 		balance_connect_server(sock)
 		transaction_connect_server(sock)
 		run_app()
-		sock.shutdown(socket.SHUT_RDWR)
 		sock.close()
 
 
