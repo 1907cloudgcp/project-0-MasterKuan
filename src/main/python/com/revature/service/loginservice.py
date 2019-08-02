@@ -14,18 +14,18 @@ def login_service():
     password = input("Password: ")
 
     hashed_password = sha256(password.encode('ascii')).hexdigest()
-    success = send_info(username + " " + hashed_password)
+    session = send_info(username + " " + hashed_password)
 
-    if success:
-        print("Login successful")
-        return 1
-    else:
+    if session == "0":
         print("Login unsuccessful")
         return 0
+    else:
+        print("Login successful")
+        return session
 
 
 def send_info(info):
     login_package = pickle.dumps(("login", info))
     server.sendall(login_package)
-    success = server.recv(1024)
-    return int(success.decode('utf8'))
+    session = server.recv(1024)
+    return session.decode()

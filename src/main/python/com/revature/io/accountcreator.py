@@ -2,9 +2,8 @@ import json
 import random
 from hashlib import sha256
 
-# I hate this
 resources = "../../../../resources/"
-ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def create_account_attempt(info):
@@ -21,7 +20,7 @@ def create_account_attempt(info):
         print("Username available")
         with open(resources+"loginaccounts.json", 'w') as accounts_write:
             account_num = login_data[-1]["account"] + 1
-            salt = ''.join(random.choice(ALPHABET) for i in range(16))
+            salt = ''.join(random.choice(ALPHANUMERIC) for i in range(16))
             salt_n_hashed = sha256((account_info[1] + salt).encode('ascii')).hexdigest()
             login_data.append({"username": account_info[0], "salt": salt, "password": salt_n_hashed, "account": account_num})
             json.dump(login_data, accounts_write, indent=4)
@@ -30,7 +29,7 @@ def create_account_attempt(info):
             account_data = json.load(bank_read)
 
         with open(resources+"bankaccounts.json", 'w') as bank_write:
-            account_data.append({"account": account_num, "balance": 0.00, "transactions": []})
+            account_data.append({"account": account_num, "balance": "0.00", "transactions": [], "session": ""})
             json.dump(account_data, bank_write, indent=4)
         return 1
 

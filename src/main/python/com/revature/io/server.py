@@ -38,8 +38,9 @@ def start_server():
 def data_parse(connection, data):
     flag = data[0]
     if flag == "login":
-        success = login_attempt(data[1])
-        connection.sendall(str(success).encode('utf8'))
+        session = login_attempt(data[1])
+        print(session)
+        connection.sendall(str(session).encode())
     elif flag == "create":
         success = create_account_attempt(data[1])
         connection.sendall(str(success).encode('utf8'))
