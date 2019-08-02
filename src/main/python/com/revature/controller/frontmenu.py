@@ -20,9 +20,9 @@ def run_front_menu():
 def front_menu():
     while True:
         print("Main Actions:\n"
-              "    Register\n"
-              "    Login\n"
-              "    Exit")
+              "    1) Register\n"
+              "    2) Login\n"
+              "    0) Exit")
 
         user_input = input("Input: ").lower()
         action = parse(user_input)
@@ -31,13 +31,13 @@ def front_menu():
 
 
 def parse(action):
-    if action == "exit":
+    if action == "exit" or action == "0" or action == "e":
         print("\nExiting")
         return 0
-    elif action == "register" :
+    elif action == "register" or action == "1" or action == "r":
         print("\nRegistering")
         return 1
-    elif action == "login":
+    elif action == "login" or action == "2" or action == "l":
         print("\nLogging in")
         return 2
     else:
