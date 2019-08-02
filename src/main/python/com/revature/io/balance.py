@@ -3,7 +3,7 @@ import json
 resources = "../../../../resources/"
 
 
-def view_transactions(info):
+def view_balance(info):
     data = info.split()
     account_number = int(data[0])
     session_token = data[1]
@@ -16,7 +16,7 @@ def view_transactions(info):
 
     for acc in bank:
         if acc["account"] == account_number and acc["session"] == session_token:
-            return acc["transactions"]
+            return acc["balance"]
 
-    print("Transactions viewing error")
+    print("Error viewing balance")
     return -1

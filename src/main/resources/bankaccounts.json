@@ -1,14 +1,22 @@
 [
     {
         "account": 1,
-        "balance": "400.0",
+        "balance": "400.00",
         "transactions": [
             [
                 "Deposit",
                 "400.00"
+            ],
+            [
+                "Deposit",
+                "30.00"
+            ],
+            [
+                "Withdraw",
+                "30.00"
             ]
         ],
-        "session": "X9FGvufEBTHSGo3U"
+        "session": "S89iHoS8eCF2NuiV"
     },
     {
         "account": 2,
@@ -23,8 +31,17 @@
     },
     {
         "account": 3,
-        "balance": "0.00",
-        "transactions": [],
-        "session": ""
+        "balance": "1.00",
+        "transactions": [
+            [
+                "Deposit",
+                "40.00"
+            ],
+            [
+                "Withdraw",
+                "39.00"
+            ]
+        ],
+        "session": "bg5kqo3YbKOFokVy"
     }
 ]

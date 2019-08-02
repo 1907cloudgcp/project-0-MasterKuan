@@ -25,5 +25,5 @@ def deposit_to_account(info):
             with open(resources + "bankaccounts.json", 'w') as account_write:
                 json.dump(bank, account_write, indent=4)
             return 1
-        else:
-            return 0
+
+    return 0

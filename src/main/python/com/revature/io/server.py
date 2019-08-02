@@ -4,6 +4,8 @@ from loginauthenticator import login_attempt
 from accountcreator import create_account_attempt
 from deposit import deposit_to_account
 from withdraw import withdraw_from_account
+from balance import view_balance
+from transactions import view_transactions
 
 
 def main():
@@ -51,6 +53,12 @@ def data_parse(connection, data):
     elif flag == "withdraw":
         success = withdraw_from_account(data[1])
         connection.sendall(str(success).encode('utf8'))
+    elif flag == "balance":
+        balance = view_balance(data[1])
+        connection.sendall(str(balance).encode())
+    elif flag == "transactions":
+        transactions = view_transactions(data[1])
+        connection.sendall(pickle.dumps(transactions))
     else:
         print("Unhandled flag")
 
