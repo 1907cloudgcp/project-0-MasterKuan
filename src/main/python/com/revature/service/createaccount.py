@@ -22,11 +22,14 @@ def create_new_account():
             return 1
         else:
             print("Username is already in use")
-            answer = input("Try again? (y/n): ").lower()
-            if answer == "y":
-                break
-            else:
-                return 0
+            while True:
+                answer = input("Try again? (y/n): ").lower()
+                if answer == "n":
+                    return 0
+                elif not answer == "y":
+                    print("Not an answer")
+                else:
+                    break
 
 
 def send_info(info):

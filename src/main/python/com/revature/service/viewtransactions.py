@@ -11,7 +11,7 @@ def transaction_connect_server(sock):
 def transaction_service(session):
     transactions = send_info(session)
 
-    if transactions == []:
+    if not transactions:
         print("No transactions have been made yet")
     else:
         try:
