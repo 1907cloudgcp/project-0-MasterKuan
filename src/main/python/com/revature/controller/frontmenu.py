@@ -12,7 +12,6 @@ def run_front_menu():
             create_new_account()
         elif action == 2:
             session = login_service()
-            print(session)
             if session:
                 return session
 

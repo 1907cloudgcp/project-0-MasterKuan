@@ -2,6 +2,7 @@ import socket
 import pickle
 from loginauthenticator import login_attempt
 from accountcreator import create_account_attempt
+from deposit import deposit_to_account
 
 
 def main():
@@ -39,10 +40,12 @@ def data_parse(connection, data):
     flag = data[0]
     if flag == "login":
         session = login_attempt(data[1])
-        print(session)
         connection.sendall(str(session).encode())
     elif flag == "create":
         success = create_account_attempt(data[1])
+        connection.sendall(str(success).encode('utf8'))
+    elif flag == "deposit":
+        success = deposit_to_account(data[1])
         connection.sendall(str(success).encode('utf8'))
     else:
         print("Unhandled flag")

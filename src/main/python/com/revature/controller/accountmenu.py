@@ -1,23 +1,22 @@
-from service.accountdeposit import *
+from service.accountdeposit import deposit_service
 from service.accountwithdraw import *
 from service.viewtransactions import *
 
 
 # Run until logout
 def run_account_menu(session):
-    data = session.split()
-    account_number = int(data[0])
-    session_token = data[1]
 
     while True:
         action = account_menu()
         if action == 0:
             return 0
         elif action == 1:
-            break
+            deposit_service(session)
         elif action == 2:
             break
         elif action == 3:
+            break
+        elif action == 4:
             break
 
 
@@ -27,6 +26,7 @@ def account_menu():
         print("Account Actions:\n"
               "    Deposit\n"
               "    Withdraw\n"
+              "    Balance\n"
               "    History\n"
               "    Logout")
         user_input = input("Input: ").lower()
@@ -45,9 +45,12 @@ def parse_account_menu(action):
     elif action == "withdraw":
         print("\nWithdrawing")
         return 2
+    elif action == "balance":
+        print("\nViewing balance")
+        return 3
     elif action == "history":
         print("\nViewing transactions history")
-        return 3
+        return 4
     else:
         print("\nInput was not recognized.")
-        return 4
+        return 5
