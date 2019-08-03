@@ -1,25 +1,19 @@
-import pickle
-
-server = None
-
-
-def deposit_connect_server(sock):
-    global server
-    server = sock
+from service.client import send_info
 
 
 def deposit_service(session):
     deposit_amount = get_amount()
+
     if deposit_amount > 0:
-        success = send_info("{} {}".format(session, deposit_amount))
-        if success:
-            print("Successfully deposited ${0:.2f}".format(deposit_amount))
-            return 1
-        else:
-            print("Error in depositing")
+        reply = send_info("deposit", "{} {}".format(session, deposit_amount))
+        flag = reply[0]
+        answer = reply[1]
+
+        print(answer)
+        if flag == 0:
             return 0
-    else:
-        return 0
+        return 1
+    return 0
 
 
 def get_amount():
@@ -33,10 +27,3 @@ def get_amount():
     except ValueError:
         print("Incorrect amount format")
         return 0
-
-
-def send_info(info):
-    deposit_info = pickle.dumps(("deposit", info))
-    server.sendall(deposit_info)
-    success = server.recv(1024)
-    return int(success.decode('utf8'))

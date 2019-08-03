@@ -1,13 +1,6 @@
 from hashlib import sha256
 from getpass import getpass
-import pickle
-
-server = None
-
-
-def login_connect_server(sock):
-    global server
-    server = sock
+from service.client import send_info
 
 
 def login_service(hide):
@@ -18,18 +11,11 @@ def login_service(hide):
         password = input("Password: ")
 
     hashed_password = sha256(password.encode('ascii')).hexdigest()
-    session = send_info(username + " " + hashed_password)
+    reply = send_info("login", username + " " + hashed_password)
+    flag = reply[0]
+    answer = reply[1]
 
-    if session == "0":
-        print("Login unsuccessful")
+    if flag == 0:
+        print(answer)
         return 0
-    else:
-        print("Login successful")
-        return session
-
-
-def send_info(info):
-    login_package = pickle.dumps(("login", info))
-    server.sendall(login_package)
-    session = server.recv(1024)
-    return session.decode()
+    return answer

@@ -1,26 +1,18 @@
 [
     {
+        "account": 1,
         "username": "Ryan",
         "salt": "skVJ31MuWqvmuIRE",
         "password": "33f2e27f5f982ec097ea528716ccc418bbf4b8a11786ea03672cffacee29331c",
-        "account": 1
+        "attempts": 0,
+        "session": ""
     },
     {
-        "username": "Ry",
-        "salt": "ThZtY5mWES1TFaw7",
-        "password": "fdfdd47030fdde66bd3d2f46f81d9f871f5a22e93cf9be85f1a416ee54338fe2",
-        "account": 2
-    },
-    {
-        "username": "Newbie",
-        "salt": "xgj7DLFHPw705Ejh",
-        "password": "937608066874e6779e9ff4d2611340b0ad5166e12d6cf222d8f7fe2c69751b87",
-        "account": 3
-    },
-    {
-        "username": "Muhammad",
-        "salt": "1OfJ11mOgpMCucUO",
-        "password": "10cdf56799ad7a3dcdc73e1f904381a5e63078af45c6c62b7050df537a90f75a",
-        "account": 4
+        "account": 2,
+        "username": "Ryry",
+        "salt": "om21kimQLvISoick",
+        "password": "b4d3132d76bd9253fd82fc218569c10b850c184b2aea5c3765090e7a6f54666d",
+        "attempts": 0,
+        "session": ""
     }
 ]

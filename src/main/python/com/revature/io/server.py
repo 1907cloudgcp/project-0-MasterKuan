@@ -1,11 +1,5 @@
 import socket
-import pickle
-from loginauthenticator import login_attempt
-from accountcreator import create_account_attempt
-from deposit import deposit_to_account
-from withdraw import withdraw_from_account
-from balance import view_balance
-from transactions import view_transactions
+from redirect import *
 
 PORT = 10000
 
@@ -29,7 +23,8 @@ def run_server():
             while True:
                 data = pickle.loads(connection.recv(1024))
                 if data:
-                    data_parse(connection, data)
+                    answer = process_data(data)
+                    connection.sendall(answer)
                 else:
                     print('No data from', client_address)
                     break
@@ -43,28 +38,7 @@ def run_server():
     sock.close()
 
 
-def data_parse(connection, data):
-    flag = data[0]
-    if flag == "login":
-        session = login_attempt(data[1])
-        connection.sendall(str(session).encode())
-    elif flag == "create":
-        success = create_account_attempt(data[1])
-        connection.sendall(str(success).encode('utf8'))
-    elif flag == "deposit":
-        success = deposit_to_account(data[1])
-        connection.sendall(str(success).encode('utf8'))
-    elif flag == "withdraw":
-        success = withdraw_from_account(data[1])
-        connection.sendall(str(success).encode('utf8'))
-    elif flag == "balance":
-        balance = view_balance(data[1])
-        connection.sendall(str(balance).encode())
-    elif flag == "transactions":
-        transactions = view_transactions(data[1])
-        connection.sendall(pickle.dumps(transactions))
-    else:
-        print("Unhandled flag")
+
 
 
 if __name__ == '__main__':

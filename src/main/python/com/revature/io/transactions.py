@@ -1,22 +1,35 @@
-import json
+from bankdatalookup import *
 
 resources = "../../../../resources/"
 
 
 def view_transactions(info):
-    data = info.split()
-    account_number = int(data[0])
-    session_token = data[1]
+    user_data = info.split()
+    account_number = int(user_data[0])
+    session_token = user_data[1]
 
     if session_token == "":
-        return -1
+        print("Attempted to access non session active account")
+        return (0, "Session error, please contact support")
 
-    with open(resources+"bankaccounts.json", 'r') as account_read:
-        bank = json.load(account_read)
+    login_file = read_file(resources+"loginaccounts.json")
+    if not login_file:
+        print("loginaccounts.json file not found")
+        return (0, "Server error, please contact support")
 
-    for acc in bank:
-        if acc["account"] == account_number and acc["session"] == session_token:
-            return acc["transactions"]
+    account_file = read_file(resources+"bankaccounts.json")
+    if not account_file:
+        print("account_file.json file not found")
+        return (0, "Server error, please contact support")
 
-    print("Transactions viewing error")
-    return -1
+    if find_login_session(login_file, account_number, session_token):
+        account = find_bank_account(account_file, account_number, session_token)
+        if account:
+            print("Account transactions shown")
+            return (1, account["transactions"])
+        else:
+            print("Account not found")
+            return (0, "Account not found, please contact support")
+
+    print("Login session error")
+    return (0, "Session error, please contact support")

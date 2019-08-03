@@ -1,38 +1,56 @@
-import json
 import random
 from hashlib import sha256
+from bankdatalookup import *
 
 resources = "../../../../resources/"
 ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def create_account_attempt(info):
-    account_info = info.split()
+    data = info.split()
+    username = data[0]
+    password = data[1]
 
-    try:
-        with open(resources+"loginaccounts.json", 'r') as accounts_read:
-            login_data = json.load(accounts_read)
-            for acc in login_data:
-                if acc["username"] == account_info[0]:
-                    print("Username is unavailable")
-                    return 0
+    login_file = read_file(resources+"loginaccounts.json")
+
+    if login_file:
+        for acc in login_file:
+            if acc["username"] == username:
+                print("Username is unavailable")
+                return (-1, "Username is unavailable")
 
         print("Username available")
-        with open(resources+"loginaccounts.json", 'w') as accounts_write:
-            account_num = login_data[-1]["account"] + 1
-            salt = ''.join(random.choice(ALPHANUMERIC) for i in range(16))
-            salt_n_hashed = sha256((account_info[1] + salt).encode('ascii')).hexdigest()
-            login_data.append({"username": account_info[0], "salt": salt, "password": salt_n_hashed, "account": account_num})
-            json.dump(login_data, accounts_write, indent=4)
+        try:
+            with open(resources+"loginaccounts.json", 'w') as accounts_write:
+                account_num = login_file[-1]["account"] + 1
+                salt = ''.join(random.choice(ALPHANUMERIC) for i in range(16))
+                salt_n_hashed = sha256((password + salt).encode('ascii')).hexdigest()
+                login_file.append({"account": account_num,
+                                   "username": username,
+                                   "salt": salt,
+                                   "password": salt_n_hashed,
+                                   "attempts": 0,
+                                   "session": ""})
+                json.dump(login_file, accounts_write, indent=4)
+        except FileNotFoundError:
+            print("File loginaccounts.json is not found")
+            return (0, "Server error, please contact support")
 
-        with open(resources+"bankaccounts.json", 'r') as bank_read:
-            account_data = json.load(bank_read)
+        account_file = read_file(resources+"bankaccounts.json")
+        if account_file:
+            account_file.append({"account": account_num, "balance": "0.00", "transactions": [], "session": ""})
+        else:
+            print("File bankaccounts.json is not found")
+            return (0, "Server error, please contact support")
 
-        with open(resources+"bankaccounts.json", 'w') as bank_write:
-            account_data.append({"account": account_num, "balance": "0.00", "transactions": [], "session": ""})
-            json.dump(account_data, bank_write, indent=4)
-        return 1
-
-    except FileNotFoundError:
+        try:
+            with open(resources+"bankaccounts.json", 'w') as bank_write:
+                json.dump(account_file, bank_write, indent=4)
+            print("New account created")
+            return (1, "New account made, login to continue")
+        except FileNotFoundError:
+            print("File bankaccounts.json is not found")
+            return (0, "Server error, please contact support")
+    else:
         print("File loginaccounts.json is missing.")
-        return 0
+        return (0, "Server error, please contact support")

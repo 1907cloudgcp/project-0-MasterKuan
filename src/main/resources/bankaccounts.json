@@ -1,70 +1,31 @@
 [
     {
         "account": 1,
-        "balance": "520.00",
+        "balance": "590.00",
         "transactions": [
             [
                 "Deposit",
-                "400.00"
+                "580.00"
             ],
-            [
-                "Deposit",
-                "30.00"
-            ],
-            [
-                "Withdraw",
-                "30.00"
-            ],
-            [
-                "Deposit",
-                "30.00"
-            ],
-            [
-                "Deposit",
-                "90.00"
-            ]
-        ],
-        "session": "Srhvuo2ozzYkNCQk"
-    },
-    {
-        "account": 2,
-        "balance": "200.00",
-        "transactions": [
-            [
-                "Deposit",
-                "200.00"
-            ]
-        ],
-        "session": "zyafeySWOeWWEk76"
-    },
-    {
-        "account": 3,
-        "balance": "1.00",
-        "transactions": [
             [
                 "Deposit",
                 "40.00"
             ],
             [
                 "Withdraw",
-                "39.00"
-            ]
-        ],
-        "session": "bg5kqo3YbKOFokVy"
-    },
-    {
-        "account": 4,
-        "balance": "10000.00",
-        "transactions": [
-            [
-                "Deposit",
-                "40000.00"
+                "60.00"
             ],
             [
-                "Withdraw",
-                "30000.00"
+                "Deposit",
+                "30.00"
             ]
         ],
-        "session": "ygVLTnm0SXbHHi9R"
+        "session": "lU4NJGp9qe3rrdwC"
+    },
+    {
+        "account": 2,
+        "balance": "0.00",
+        "transactions": [],
+        "session": "5sd18NqW89Imz5SA"
     }
 ]

@@ -1,28 +1,23 @@
-import pickle
-
-server = None
-
-
-def transaction_connect_server(sock):
-    global server
-    server = sock
+from service.client import send_info
 
 
 def transaction_service(session):
-    transactions = send_info(session)
+    reply = send_info("transactions", session)
+    flag = reply[0]
+    answer = reply[1]
 
-    if not transactions:
+    if flag == 0:
+        print(answer)
+        return 0
+
+    if not answer:
         print("No transactions have been made yet")
-    else:
-        try:
-            for t in transactions:
-                print("{0}: ${1:.2f}".format(t[0], float(t[1])))
-        except ValueError:
-            print("Error in viewing transaction history")
+        return 0
 
-
-def send_info(info):
-    transactions_info = pickle.dumps(("transactions", info))
-    server.sendall(transactions_info)
-    transactions = server.recv(1024)
-    return pickle.loads(transactions)
+    try:
+        for t in answer:
+            print("{0}: ${1:.2f}".format(t[0], float(t[1])))
+        return 1
+    except ValueError:
+        print("Error in viewing transaction history")
+        return 0

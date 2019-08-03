@@ -1,42 +1,77 @@
 import json
 import random
 from hashlib import sha256
+from bankdatalookup import read_file
 
 resources = "../../../../resources/"
 ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def login_attempt(info):
-    login_info = info.split()
-    try:
-        with open(resources+"loginaccounts.json", 'r') as f:
-            data = json.load(f)
-            for acc in data:
-                if acc["username"] == login_info[0]:
-                    if sha256((login_info[1] + acc["salt"]).encode('ascii')).hexdigest() == acc["password"]:
-                        print("Login success")
-                        session_token = ''.join(random.choice(ALPHANUMERIC) for i in range(16))
-                        set_session(acc["account"], session_token)
-                        session = str(acc["account"]) + " " + session_token
-                        return session
-                    else:
-                        print("Incorrect password")
+    user_data = info.split()
+    username = user_data[0]
+    password = user_data[1]
 
-                        return "0"
-            print("Account doesn't exist")
-        return "0"
-    except FileNotFoundError:
-        print("File loginaccounts.json is missing.")
-        return "0"
+    login_file = read_file(resources+"loginaccounts.json")
 
+    if login_file:
+        for login_account in login_file:
+            if login_account["username"] == username:
+                # Account locked
+                if login_account["attempts"] > 5:
+                    print("Account is locked")
+                    return (0, "Account is locked due to exceeding the number of incorrect attempts")
 
-def set_session(account_num, token):
-    with open(resources+"bankaccounts.json", 'r') as bank_read:
-        bank = json.load(bank_read)
+                # Check password match
+                if sha256((password + login_account["salt"]).encode('ascii')).hexdigest() == login_account[
+                    "password"]:
+                    # Logged in already
+                    if not login_account["session"] == "":
+                        print("Account already logged in")
+                        return (0, "Account is already logged in")
 
-    for acc in bank:
-        if acc["account"] == account_num:
-            acc["session"] = token
+                    # Success
+                    session_token = ''.join(random.choice(ALPHANUMERIC) for i in range(16))
 
-    with open(resources+"bankaccounts.json", 'w') as bank_write:
-        json.dump(bank, bank_write, indent=4)
+                    # Write to login accounts the session token and reset attempts
+                    login_account["session"] = session_token
+                    login_account["attempts"] = 0
+                    try:
+                        with open(resources+"loginaccounts.json", 'w') as login_write:
+                            json.dump(login_file, login_write, indent=4)
+                    except FileNotFoundError:
+                        print("File loginaccounts.json is missing")
+                        return (0, "Server error, please contact support")
+
+                    # Write to bank accounts the session token
+                    bank_accounts = read_file(resources+"bankaccounts.json")
+                    if bank_accounts:
+                        for account in bank_accounts:
+                            if account["account"] == login_account["account"]:
+                                account["session"] = session_token
+                    try:
+                        with open(resources+"bankaccounts.json", 'w') as json_file:
+                            json.dump(bank_accounts, json_file, indent=4)
+                    except FileNotFoundError:
+                        print("File bankaccounts.json is missing")
+                        return (0, "Server error, please contact support")
+
+                    # Return account number and session token
+                    session = "{} {}".format(str(login_account["account"]), session_token)
+                    print("Login successful")
+                    return (1, session)
+                else:
+                    print("Incorrect password")
+                    login_account["attempts"] += 1
+                    try:
+                        with open(resources+"loginaccounts.json", 'w') as login_write:
+                            json.dump(login_file, login_write, indent=4)
+                    except FileNotFoundError:
+                        print("File loginaccounts.json is missing")
+                        return (0, "Server error, please contact support")
+                    return (0, "Incorrect password")
+        print("Account doesn't exist")
+        return (0, "Account doesn't exist")
+    else:
+        print("HELP")
+        return (0, "Server error, please contact support")

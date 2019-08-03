@@ -2,15 +2,16 @@ from service.accountdeposit import deposit_service
 from service.accountwithdraw import withdraw_service
 from service.viewbalance import balance_service
 from service.viewtransactions import transaction_service
+from service.logoutservice import logout_service
 
 
 # Run until logout
 def run_account_menu(session):
-
     while True:
         action = account_menu()
         if action == 0:
-            return 0
+            logout_service(session)
+            return 1
         elif action == 1:
             deposit_service(session)
         elif action == 2:
