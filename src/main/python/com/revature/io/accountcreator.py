@@ -8,8 +8,10 @@ ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def create_account_attempt(info):
     data = info.split()
-    username = data[0]
-    password = data[1]
+    first_name = data[0]
+    last_name = data[1]
+    username = data[2]
+    password = data[3]
 
     login_file = read_file(resources+"loginaccounts.json")
 
@@ -26,6 +28,8 @@ def create_account_attempt(info):
                 salt = ''.join(random.choice(ALPHANUMERIC) for i in range(16))
                 salt_n_hashed = sha256((password + salt).encode('ascii')).hexdigest()
                 login_file.append({"account": account_num,
+                                   "firstname": first_name,
+                                   "lastname": last_name,
                                    "username": username,
                                    "salt": salt,
                                    "password": salt_n_hashed,
@@ -38,7 +42,8 @@ def create_account_attempt(info):
 
         account_file = read_file(resources+"bankaccounts.json")
         if account_file:
-            account_file.append({"account": account_num, "balance": "0.00", "transactions": [], "session": ""})
+            account_file.append({"account": account_num, "firstname": first_name, "lastname": last_name,
+                                 "balance": "0.00", "transactions": [], "session": ""})
         else:
             print("File bankaccounts.json is not found")
             return (0, "Server error, please contact support")

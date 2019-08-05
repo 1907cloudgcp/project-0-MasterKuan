@@ -6,6 +6,7 @@ from withdraw import withdraw_from_account
 from balance import view_balance
 from transactions import view_transactions
 from logout import logout_attempt
+from getallinfo import get_all_info
 
 
 def process_data(data):
@@ -24,6 +25,8 @@ def process_data(data):
         output = view_transactions(data[1])
     elif flag == "logout":
         output = logout_attempt(data[1])
+    elif flag == "getall":
+        output = get_all_info(data[1])
     else:
         print("Unhandled flag")
         output = (0, "Server error, please contact support")

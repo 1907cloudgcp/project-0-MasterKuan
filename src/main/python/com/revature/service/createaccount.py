@@ -3,12 +3,15 @@ from service.client import send_info
 
 
 def create_new_account():
+    first_name = get_non_blank("First name")
+    last_name = get_non_blank("Last name")
+
     while True:
-        username = input("Username: ")
-        password = input("Password: ")
+        username = get_non_blank("Username")
+        password = get_non_blank("Password")
 
         hashed_password = sha256(password.encode('ascii')).hexdigest()
-        reply = send_info("create", username + " " + hashed_password)
+        reply = send_info("create", "{} {} {} {}".format(first_name, last_name, username, hashed_password))
         flag = reply[0]
         answer = reply[1]
 
@@ -27,3 +30,12 @@ def create_new_account():
                     break
         else:
             return 1
+
+
+def get_non_blank(field):
+    while True:
+        answer = input("{}: ".format(field))
+        if answer == "":
+            print("No input recieved for {}".format(field))
+        else:
+            return answer

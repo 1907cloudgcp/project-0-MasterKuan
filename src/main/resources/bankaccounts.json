@@ -1,6 +1,8 @@
 [
     {
         "account": 1,
+        "firstname": "Ryan",
+        "lastname": "Kuan",
         "balance": "590.00",
         "transactions": [
             [
@@ -20,12 +22,14 @@
                 "30.00"
             ]
         ],
-        "session": "lU4NJGp9qe3rrdwC"
+        "session": "Nlc6B97dyxpr37ma"
     },
     {
         "account": 2,
+        "firstname": "Ry",
+        "lastname": "Ku",
         "balance": "0.00",
         "transactions": [],
-        "session": "5sd18NqW89Imz5SA"
+        "session": "dWQdxtUHnIw3tNz9"
     }
 ]
