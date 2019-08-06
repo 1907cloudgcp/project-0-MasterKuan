@@ -1,4 +1,7 @@
 import socket
+import logging
+import logging.config
+import yaml
 from redirect import *
 
 PORT = 10000
@@ -10,6 +13,7 @@ def main():
 
 def run_server():
     global PORT
+    logger = logging.getLogger(__name__)
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = ('localhost', PORT)
@@ -26,20 +30,21 @@ def run_server():
                     answer = process_data(data)
                     connection.sendall(answer)
                 else:
-                    print('No data from', client_address)
+                    logger.info("No data from {}".format(client_address))
                     break
 
         finally:
-            print("Client disconnected")
+            logger.info("Client disconnected")
             connection.close()
             break
 
-    print("Server shutting down")
+    logger.info("Server shutting down")
     sock.close()
 
 
-
-
-
 if __name__ == '__main__':
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(level=logging.DEBUG, filename="../../../../resources/serverlog.log",
+                        format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
     main()

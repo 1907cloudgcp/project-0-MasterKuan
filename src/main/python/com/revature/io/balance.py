@@ -1,3 +1,4 @@
+import logging
 from bankdatalookup import *
 
 resources = "../../../../resources/"
@@ -7,19 +8,20 @@ def view_balance(info):
     data = info.split()
     account_number = int(data[0])
     session_token = data[1]
+    logger = logging.getLogger(__name__)
 
     if session_token == "":
-        print("Attempted to access non session active account")
+        logger.warning("User sent empty session token")
         return (0, "Session error, please contact support")
 
     login_file = read_file(resources+"loginaccounts.json")
     if not login_file:
-        print("loginaccounts.json file not found")
+        logger.critical("loginaccounts.json file not found")
         return (0, "Server error, please contact support")
 
     account_file = read_file(resources+"bankaccounts.json")
     if not account_file:
-        print("account_file.json file not found")
+        logger.critical("account_file.json file not found")
         return (0, "Server error, please contact support")
 
     if find_login_session(login_file, account_number, session_token):
@@ -28,14 +30,14 @@ def view_balance(info):
             try:
                 balance = float(account["balance"])
             except ValueError:
-                print("Could not convert balance to float")
+                logger.error("Could not convert balance to float: Balance: {}".format(balance))
                 return (0, "Server error, please contact support")
-            print("Account balance shown")
+            logger.info("Account balance shown. Account: #{}".format(account_number))
             message = "Current balance is ${0:.2f}".format(balance)
             return (1, message)
         else:
-            print("Account not found")
+            logger.error("Account not found. Account: #{}".format(account_number))
             return (0, "Account not found, please contact support")
 
-    print("Login session error")
+    logger.error("Login session error. Account: #{}, Session Token: {}".format(account_number, session_token))
     return (0, "Session error, please contact support")

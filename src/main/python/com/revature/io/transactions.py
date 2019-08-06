@@ -1,3 +1,4 @@
+import logging
 from bankdatalookup import *
 
 resources = "../../../../resources/"
@@ -7,29 +8,30 @@ def view_transactions(info):
     user_data = info.split()
     account_number = int(user_data[0])
     session_token = user_data[1]
+    logger = logging.getLogger(__name__)
 
     if session_token == "":
-        print("Attempted to access non session active account")
+        logger.warning("User sent empty session token")
         return (0, "Session error, please contact support")
 
-    login_file = read_file(resources+"loginaccounts.json")
+    login_file = read_file(resources + "loginaccounts.json")
     if not login_file:
-        print("loginaccounts.json file not found")
+        logger.critical("loginaccounts.json file not found")
         return (0, "Server error, please contact support")
 
-    account_file = read_file(resources+"bankaccounts.json")
+    account_file = read_file(resources + "bankaccounts.json")
     if not account_file:
-        print("account_file.json file not found")
+        logger.critical("account_file.json file not found")
         return (0, "Server error, please contact support")
 
     if find_login_session(login_file, account_number, session_token):
         account = find_bank_account(account_file, account_number, session_token)
         if account:
-            print("Account transactions shown")
+            logger.info("Account transactions shown. Account: #{}".format(account_number))
             return (1, account["transactions"])
         else:
-            print("Account not found")
+            logger.error("Account not found. Account: #{}".format(account_number))
             return (0, "Account not found, please contact support")
 
-    print("Login session error")
+    logger.error("Login session error. Account: #{}, Session Token: {}".format(account_number, session_token))
     return (0, "Session error, please contact support")

@@ -1,3 +1,4 @@
+import logging
 from bankdatalookup import *
 
 resources = "../../../../resources/"
@@ -7,6 +8,7 @@ def logout_attempt(info):
     data = info.split()
     account_number = int(data[0])
     session_token = data[1]
+    logger = logging.getLogger(__name__)
 
     login_file = read_file(resources+"loginaccounts.json")
     if login_file:
@@ -17,15 +19,16 @@ def logout_attempt(info):
             try:
                 with open(resources+"loginaccounts.json", 'w') as f:
                     json.dump(login_file, f, indent=4)
-                print("Logout successful")
+                logger.info("Logout successful. Account: #{}".format(account_number))
                 return (1, "Successfully logged out")
             except FileNotFoundError:
-                print("File loginaccounts.json is not found")
+                logger.critical("File loginaccounts.json is not found")
                 return (0, "Server error, please contact support")
         else:
-            print("Could not access login account")
+            logger.error("Could not access login account. Account: #{}, Session: {}".format(account_number,
+                                                                                             session_token))
             return (0, "Could not access account, contact support")
     else:
-        print("File loginaccounts.json is missing.")
+        logger.critical("File loginaccounts.json is missing.")
         return (0, "Server error, please contact support")
 

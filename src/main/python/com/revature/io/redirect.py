@@ -1,4 +1,5 @@
 import pickle
+import logging
 from loginauthenticator import login_attempt
 from accountcreator import create_account_attempt
 from deposit import deposit_to_account
@@ -11,6 +12,8 @@ from getallinfo import get_all_info
 
 def process_data(data):
     flag = data[0]
+    logger = logging.getLogger(__name__)
+
     if flag == "login":
         output = login_attempt(data[1])
     elif flag == "create":
@@ -28,7 +31,7 @@ def process_data(data):
     elif flag == "getall":
         output = get_all_info(data[1])
     else:
-        print("Unhandled flag")
+        logger.warning("Unhandled flag. Flag: {}, Redirect Data: {}".format(flag, data[1]))
         output = (0, "Server error, please contact support")
 
     return pickle.dumps(output)
