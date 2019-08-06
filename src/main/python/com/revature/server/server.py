@@ -1,7 +1,7 @@
 import socket
 import logging
 import logging.config
-from io.redirect import *
+from serverio.redirect import *
 
 PORT = 10000
 

@@ -1,9 +1,9 @@
-from client.service.accountdeposit import deposit_service
-from client.service.accountwithdraw import withdraw_service
-from client.service.viewbalance import balance_service
-from client.service.viewtransactions import transaction_service
-from client.service.logoutservice import logout_service
-from client.service.getfullaccountinfo import get_all_service
+from service.accountdeposit import deposit_service
+from service.accountwithdraw import withdraw_service
+from service.viewbalance import balance_service
+from service.viewtransactions import transaction_service
+from service.logoutservice import logout_service
+from service.getfullaccountinfo import get_all_service
 
 
 # Run until logout

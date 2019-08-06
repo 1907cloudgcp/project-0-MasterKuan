@@ -1,6 +1,6 @@
 import random
-import logging
 from hashlib import sha256
+
 from .bankdatalookup import *
 
 ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

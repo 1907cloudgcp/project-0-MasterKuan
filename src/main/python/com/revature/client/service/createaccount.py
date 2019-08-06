@@ -1,5 +1,5 @@
 from hashlib import sha256
-from client.service.client import send_info
+from .connection import send_info
 
 
 def create_new_account():
