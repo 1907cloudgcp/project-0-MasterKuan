@@ -1,9 +1,8 @@
 import random
 import logging
 from hashlib import sha256
-from bankdatalookup import *
+from .bankdatalookup import *
 
-resources = "../../../../resources/"
 ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 

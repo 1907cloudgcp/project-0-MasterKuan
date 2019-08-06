@@ -1,8 +1,7 @@
 import socket
 import logging
 import logging.config
-import yaml
-from redirect import *
+from io.redirect import *
 
 PORT = 10000
 
@@ -23,7 +22,7 @@ def run_server():
     while True:
         connection, client_address = sock.accept()
         try:
-            print('Connection from', client_address)
+            logger.info("Connection from {}".format(client_address))
             while True:
                 data = pickle.loads(connection.recv(1024))
                 if data:

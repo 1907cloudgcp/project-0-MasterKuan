@@ -1,7 +1,5 @@
 import logging
-from bankdatalookup import *
-
-resources = "../../../../resources/"
+from .bankdatalookup import *
 
 
 def get_all_info(info):

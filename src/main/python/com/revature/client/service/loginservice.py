@@ -1,6 +1,6 @@
 from hashlib import sha256
 from getpass import getpass
-from service.client import send_info
+from client.service.client import send_info
 
 
 def login_service(hide):

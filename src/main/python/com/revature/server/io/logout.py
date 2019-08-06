@@ -1,7 +1,5 @@
 import logging
-from bankdatalookup import *
-
-resources = "../../../../resources/"
+from .bankdatalookup import *
 
 
 def logout_attempt(info):

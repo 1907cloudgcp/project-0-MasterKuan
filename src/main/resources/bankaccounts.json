@@ -3,26 +3,14 @@
         "account": 1,
         "firstname": "Ryan",
         "lastname": "Kuan",
-        "balance": "590.00",
+        "balance": "580.00",
         "transactions": [
             [
                 "Deposit",
                 "580.00"
-            ],
-            [
-                "Deposit",
-                "40.00"
-            ],
-            [
-                "Withdraw",
-                "60.00"
-            ],
-            [
-                "Deposit",
-                "30.00"
             ]
         ],
-        "session": "kXg8UT8ApvWlDyYf"
+        "session": "rCYiNThhNoIGRLWq"
     },
     {
         "account": 2,

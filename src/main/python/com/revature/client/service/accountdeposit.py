@@ -1,10 +1,11 @@
-from service.client import send_info
+from client.service.client import send_info
 
 
-def withdraw_service(session):
-    withdraw_amount = get_amount()
-    if withdraw_amount > 0:
-        reply = send_info("withdraw", "{} {}".format(session, withdraw_amount))
+def deposit_service(session):
+    deposit_amount = get_amount()
+
+    if deposit_amount > 0:
+        reply = send_info("deposit", "{} {}".format(session, deposit_amount))
         flag = reply[0]
         answer = reply[1]
 
@@ -16,11 +17,11 @@ def withdraw_service(session):
 
 
 def get_amount():
-    amount = input("Withdraw amount: ")
+    amount = input("Deposit amount: ")
     try:
         val = float(amount)
         if val <= 0:
-            print("Cannot withdraw ${0:.2f}".format(val))
+            print("Cannot deposit ${0:.2f}".format(val))
             return 0
         return val
     except ValueError:

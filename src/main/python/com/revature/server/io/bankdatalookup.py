@@ -1,6 +1,8 @@
 import json
 import logging
 
+resources = "../../../../../resources/"
+
 
 def read_file(file_name):
     logger = logging.getLogger(__name__)

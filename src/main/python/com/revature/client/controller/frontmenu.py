@@ -1,6 +1,6 @@
-from service.createaccount import *
-from service.loginservice import *
-from controller.settingsmenu import run_settings_menu, get_hide
+from client.service.createaccount import *
+from client.service.loginservice import *
+from client.controller.settingsmenu import run_settings_menu, get_hide
 
 
 # Run until exit or logged in

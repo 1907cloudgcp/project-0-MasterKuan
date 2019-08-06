@@ -1,5 +1,5 @@
 import json
-from service.client import send_info
+from client.service.client import send_info
 
 
 def get_all_service(session):
