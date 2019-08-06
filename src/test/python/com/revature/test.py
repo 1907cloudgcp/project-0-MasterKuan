@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+import os
 
-'''
-This is your main testing script, this should call several other testing scripts on its own
-'''
+
 def main():
-	print('TO-DO')
+	os.system("python server/server.py &")
+	os.system("python server/client.py")
+
 
 if __name__ == '__main__':
 	main()

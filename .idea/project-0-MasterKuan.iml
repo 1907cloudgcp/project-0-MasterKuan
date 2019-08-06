@@ -3,12 +3,12 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/server/serverio" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/server/error" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/client/service" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/client/controller" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/server" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/client" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/server/serverio" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/server/error" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/python/com/revature/server" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
