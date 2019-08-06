@@ -11,12 +11,12 @@ def get_all_info(info):
         logger.warning("User sent empty session token")
         return (0, "Session error, please contact support")
 
-    login_file = read_file(resources + "loginaccounts.json")
+    login_file = read_file(RESOURCES + "loginaccounts.json")
     if not login_file:
         logger.critical("loginaccounts.json file not found")
         return (0, "Server error, please contact support")
 
-    account_file = read_file(resources + "bankaccounts.json")
+    account_file = read_file(RESOURCES + "bankaccounts.json")
     if not account_file:
         logger.critical("account_file.json file not found")
         return (0, "Server error, please contact support")

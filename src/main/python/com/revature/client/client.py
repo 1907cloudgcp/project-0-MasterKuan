@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from service.connection import connect
 from controller.run import run_app
+from service.connection import connect
 
 
 def main():

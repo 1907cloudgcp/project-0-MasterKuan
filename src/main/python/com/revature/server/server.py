@@ -1,6 +1,5 @@
-import socket
-import logging
 import logging.config
+import socket
 from serverio.redirect import *
 
 PORT = 10000
@@ -44,6 +43,6 @@ def run_server():
 if __name__ == '__main__':
     logger = logging.getLogger(__name__)
     logging.basicConfig(level=logging.DEBUG, filename="../../../../resources/serverlog.log",
-                        format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+                        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt='%m/%d/%Y %I:%M:%S %p')
 
     main()

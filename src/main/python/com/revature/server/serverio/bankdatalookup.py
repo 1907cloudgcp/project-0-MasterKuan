@@ -1,7 +1,7 @@
 import json
 import logging
 
-resources = "../../../../../resources/"
+RESOURCES = "../../../../resources/"
 
 
 def read_file(file_name):

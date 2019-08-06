@@ -1,5 +1,5 @@
-from .bankdatalookup import *
 from error.customerrors import LargeWithdrawal
+from .bankdatalookup import *
 
 
 def withdraw_from_account(info):
@@ -13,12 +13,12 @@ def withdraw_from_account(info):
         logger.warning("User sent empty session token")
         return (0, "Session error, please contact support")
 
-    login_file = read_file(resources + "loginaccounts.json")
+    login_file = read_file(RESOURCES + "loginaccounts.json")
     if not login_file:
         logger.critical("loginaccounts.json file not found")
         return (0, "Server error, please contact support")
 
-    account_file = read_file(resources + "bankaccounts.json")
+    account_file = read_file(RESOURCES + "bankaccounts.json")
     if not account_file:
         logger.critical("account_file.json file not found")
         return (0, "Server error, please contact support")
@@ -47,7 +47,7 @@ def withdraw_from_account(info):
                 message = (1, "Withdrawal request of ${0:.2f} is too large.\nPending for approval".format(withdraw_amount))
             finally:
                 try:
-                    with open(resources + "bankaccounts.json", 'w') as account_write:
+                    with open(RESOURCES + "bankaccounts.json", 'w') as account_write:
                         json.dump(account_file, account_write, indent=4)
                     return message
                 except FileNotFoundError:

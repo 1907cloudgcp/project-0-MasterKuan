@@ -1,4 +1,5 @@
 from hashlib import sha256
+
 from .connection import send_info
 
 
@@ -19,7 +20,6 @@ def create_new_account():
         if flag == 0:
             return 0
         elif flag == -1:
-            print("Username is already in use")
             while True:
                 answer = input("Try again? (y/n): ").lower()
                 if answer == "n":
