@@ -9,6 +9,7 @@ from .loginauthenticator import login_attempt
 from .logout import logout_attempt
 from .transactions import view_transactions
 from .withdraw import withdraw_from_account
+from .transferfunds import transfer_funds
 
 
 def process_data(data):
@@ -31,6 +32,8 @@ def process_data(data):
         output = logout_attempt(data[1])
     elif flag == "getall":
         output = get_all_info(data[1])
+    elif flag == "transfer":
+        output = transfer_funds(data[1])
     else:
         logger.warning("Unhandled flag. Flag: {}, Redirect Data: {}".format(flag, data[1]))
         output = (0, "Server error, please contact support")

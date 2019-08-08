@@ -4,6 +4,7 @@ from service.getfullaccountinfo import get_all_service
 from service.logoutservice import logout_service
 from service.viewbalance import balance_service
 from service.viewtransactions import transaction_service
+from service.transferservice import transfer_service
 
 
 # Run until logout
@@ -23,6 +24,8 @@ def run_account_menu(session):
             transaction_service(session)
         elif action == 5:
             get_all_service(session)
+        elif action == 6:
+            transfer_service(session)
 
 
 # Get user input until valid input
@@ -32,8 +35,9 @@ def account_menu():
               "    1) Deposit\n"
               "    2) Withdraw\n"
               "    3) Balance\n"
-              "    4) Transactions\n"
+              "    4) History\n"
               "    5) Full account details\n"
+              "    6) Transfer funds\n"
               "    0) Logout")
         user_input = input("Input: ").lower()
         action = parse_account_menu(user_input)
@@ -54,12 +58,15 @@ def parse_account_menu(action):
     elif action == "balance" or action == "3" or action == "b":
         print("\nViewing balance")
         return 3
-    elif action == "transactions" or action == "4" or action == "t":
+    elif action == "history" or action == "4" or action == "h":
         print("\nViewing transactions history")
         return 4
     elif action == "full" or action == "5" or action == "f":
         print("\nViewing full account details")
         return 5
+    elif action == "transfer" or action == "6" or action == "t":
+        print("\nTransfer money to a different account")
+        return 6
     else:
         print("\nInput was not recognized.")
         return 999

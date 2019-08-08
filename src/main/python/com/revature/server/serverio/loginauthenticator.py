@@ -18,7 +18,7 @@ def login_attempt(info):
         for login_account in login_file:
             if login_account["username"] == username:
                 # Account locked
-                if login_account["attempts"] > 5:
+                if login_account["attempts"] >= 5:
                     logger.warning("Account is locked. Account: #{}".format(login_account["account"]))
                     return (0, "Account is locked due to exceeding the number of incorrect attempts")
 

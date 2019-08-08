@@ -49,5 +49,5 @@ def find_bank_account(account_file, account_number, session_token):
                 logger.error("Account session token error. Account: #{}, Session Token: {}".format(account_number,
                                                                                                     session_token))
                 return 0
-    logger.error("Login account not found. Account: #{}".format(account_number))
+    logger.error("Bank account not found. Account: #{}".format(account_number))
     return 0

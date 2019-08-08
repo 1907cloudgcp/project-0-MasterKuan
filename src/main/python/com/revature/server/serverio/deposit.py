@@ -44,7 +44,7 @@ def deposit_to_account(info):
                 message = (1, "Deposit request of ${0:.2f} is too large.\nPending for approval".format(deposit_amount))
             finally:
                 try:
-                    with open(get_file_directory() + "bankaccounts.json", 'w') as account_write:
+                    with open(get_file_directory()+"bankaccounts.json", 'w') as account_write:
                         json.dump(account_file, account_write, indent=4)
                     return message
                 except FileNotFoundError:
