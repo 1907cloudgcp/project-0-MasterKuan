@@ -1,19 +1,13 @@
-import logging.config
 import socket
-from serverio.bankdatalookup import set_file_directory
 from serverio.redirect import *
 
 PORT = 10000
 
 
-def main():
-    set_file_directory("resources/")
-    run_server()
-
-
 def run_server():
     global PORT
     logger = logging.getLogger(__name__)
+    logger.info("Server started up")
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = ("localhost", PORT)
@@ -40,11 +34,3 @@ def run_server():
 
     logger.info("Server shutting down")
     sock.close()
-
-
-if __name__ == '__main__':
-    logger = logging.getLogger(__name__)
-    logging.basicConfig(level=logging.DEBUG, filename="resources/serverlog.log",
-                        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt='%m/%d/%Y %I:%M:%S %p')
-
-    main()

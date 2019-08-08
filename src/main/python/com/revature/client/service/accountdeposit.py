@@ -1,4 +1,4 @@
-from service.connection import send_info
+from service.client import send_info
 
 
 def deposit_service(session):

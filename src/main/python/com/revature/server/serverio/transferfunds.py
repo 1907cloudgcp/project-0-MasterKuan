@@ -34,7 +34,7 @@ def transfer_funds(info):
                     found = True
                     break
             if not found:
-                logger.error("Bank account not found. Account: #{}".format(deposit_account_number))
+                logger.error("Transfer bank account not found. Account: #{}".format(deposit_account_number))
                 return (0, "Transfer bank account not found.")
 
             try:

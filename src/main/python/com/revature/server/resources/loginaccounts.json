@@ -36,5 +36,15 @@
         "password": "3ab4b0a651808339e32fcd2785560ba58d6e367ed8ecbf9cce4d42c341d3c97e",
         "attempts": 0,
         "session": ""
+    },
+    {
+        "account": 5,
+        "firstname": "Newacc",
+        "lastname": "me",
+        "username": "R",
+        "salt": "6LNq38dsaxMCN35W",
+        "password": "8ed2779dfea33eb3fe40b584e1f14c00c6eea3de2a2c22d4788cf1ea9bff3bf3",
+        "attempts": 0,
+        "session": ""
     }
 ]
