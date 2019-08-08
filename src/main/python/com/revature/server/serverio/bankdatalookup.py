@@ -1,7 +1,17 @@
 import json
 import logging
 
-RESOURCES = "../../../../resources/"
+RESOURCES = "resources/"
+
+
+def set_file_directory(fd):
+    global RESOURCES
+    RESOURCES = fd
+
+
+def get_file_directory():
+    global RESOURCES
+    return RESOURCES
 
 
 def read_file(file_name):

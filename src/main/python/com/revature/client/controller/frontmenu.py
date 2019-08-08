@@ -1,6 +1,6 @@
 from service.createaccount import *
 from service.loginservice import *
-from .settingsmenu import run_settings_menu, get_hide
+from controller.settingsmenu import run_settings_menu, get_hide
 
 
 # Run until exit or logged in
@@ -14,6 +14,7 @@ def run_front_menu():
         elif action == 2:
             session = login_service(get_hide())
             if session:
+                print("Logged in successfully")
                 return session
         elif action == 3:
             run_settings_menu()
@@ -29,12 +30,12 @@ def front_menu():
               "    0) Exit")
 
         user_input = input("Input: ").lower()
-        action = parse(user_input)
+        action = parse_front_menu(user_input)
         if not action == 999:
             return action
 
 
-def parse(action):
+def parse_front_menu(action):
     if action == "exit" or action == "0" or action == "e":
         print("\nExiting")
         return 0

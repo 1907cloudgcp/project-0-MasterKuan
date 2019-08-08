@@ -11,12 +11,12 @@ def view_balance(info):
         logger.warning("User sent empty session token")
         return (0, "Session error, please contact support")
 
-    login_file = read_file(RESOURCES+"loginaccounts.json")
+    login_file = read_file(get_file_directory()+"loginaccounts.json")
     if not login_file:
         logger.critical("loginaccounts.json file not found")
         return (0, "Server error, please contact support")
 
-    account_file = read_file(RESOURCES+"bankaccounts.json")
+    account_file = read_file(get_file_directory()+"bankaccounts.json")
     if not account_file:
         logger.critical("account_file.json file not found")
         return (0, "Server error, please contact support")

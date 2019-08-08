@@ -14,7 +14,7 @@ def create_account_attempt(info):
     password = data[3]
     logger = logging.getLogger(__name__)
 
-    login_file = read_file(RESOURCES+"loginaccounts.json")
+    login_file = read_file(get_file_directory()+"loginaccounts.json")
 
     if login_file:
         for acc in login_file:
@@ -24,7 +24,7 @@ def create_account_attempt(info):
 
         logger.info("{} username available".format(username))
         try:
-            with open(RESOURCES+"loginaccounts.json", 'w') as accounts_write:
+            with open(get_file_directory()+"loginaccounts.json", 'w') as accounts_write:
                 account_num = login_file[-1]["account"] + 1
                 salt = ''.join(random.choice(ALPHANUMERIC) for i in range(16))
                 salt_n_hashed = sha256((password + salt).encode('ascii')).hexdigest()
@@ -41,7 +41,7 @@ def create_account_attempt(info):
             logger.critical("File loginaccounts.json is not found")
             return (0, "Server error, please contact support")
 
-        account_file = read_file(RESOURCES+"bankaccounts.json")
+        account_file = read_file(get_file_directory()+"bankaccounts.json")
         if account_file:
             account_file.append({"account": account_num, "firstname": first_name, "lastname": last_name,
                                  "balance": "0.00", "transactions": [], "session": ""})
@@ -50,7 +50,7 @@ def create_account_attempt(info):
             return (0, "Server error, please contact support")
 
         try:
-            with open(RESOURCES+"bankaccounts.json", 'w') as bank_write:
+            with open(get_file_directory()+"bankaccounts.json", 'w') as bank_write:
                 json.dump(account_file, bank_write, indent=4)
             logger.info("New account created: Account: #{}, Username: {}".format(account_num, username))
             return (1, "New account made, login to continue")

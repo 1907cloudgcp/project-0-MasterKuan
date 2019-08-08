@@ -1,5 +1,5 @@
-from .accountmenu import *
-from .frontmenu import *
+from controller.accountmenu import *
+from controller.frontmenu import *
 
 
 # If login is successful from front menu, run account menu

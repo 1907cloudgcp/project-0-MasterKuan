@@ -25,12 +25,12 @@ def settings_menu():
               "    0) Exit")
 
         user_input = input("Input: ").lower()
-        action = parse(user_input)
+        action = parse_settings(user_input)
         if not action == 999:
             return action
 
 
-def parse(action):
+def parse_settings(action):
     if action == "exit" or action == "0" or action == "e":
         print("\nExiting")
         return 0

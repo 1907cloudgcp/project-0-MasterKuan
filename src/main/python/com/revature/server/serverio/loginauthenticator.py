@@ -12,7 +12,7 @@ def login_attempt(info):
     password = user_data[1]
     logger = logging.getLogger(__name__)
 
-    login_file = read_file(RESOURCES+"loginaccounts.json")
+    login_file = read_file(get_file_directory()+"loginaccounts.json")
 
     if login_file:
         for login_account in login_file:
@@ -36,20 +36,20 @@ def login_attempt(info):
                     login_account["session"] = session_token
                     login_account["attempts"] = 0
                     try:
-                        with open(RESOURCES+"loginaccounts.json", 'w') as login_write:
+                        with open(get_file_directory()+"loginaccounts.json", 'w') as login_write:
                             json.dump(login_file, login_write, indent=4)
                     except FileNotFoundError:
                         logger.critial("File loginaccounts.json is missing")
                         return (0, "Server error, please contact support")
 
                     # Write to bank accounts the session token
-                    bank_accounts = read_file(RESOURCES+"bankaccounts.json")
+                    bank_accounts = read_file(get_file_directory()+"bankaccounts.json")
                     if bank_accounts:
                         for account in bank_accounts:
                             if account["account"] == login_account["account"]:
                                 account["session"] = session_token
                     try:
-                        with open(RESOURCES+"bankaccounts.json", 'w') as json_file:
+                        with open(get_file_directory()+"bankaccounts.json", 'w') as json_file:
                             json.dump(bank_accounts, json_file, indent=4)
                     except FileNotFoundError:
                         logger.critical("File bankaccounts.json is missing")
@@ -64,7 +64,7 @@ def login_attempt(info):
                     logger.info("Incorrect password. Account: #{}".format(login_account["account"]))
                     login_account["attempts"] += 1
                     try:
-                        with open(RESOURCES+"loginaccounts.json", 'w') as login_write:
+                        with open(get_file_directory()+"loginaccounts.json", 'w') as login_write:
                             json.dump(login_file, login_write, indent=4)
                     except FileNotFoundError:
                         logger.critical("File loginaccounts.json is missing")

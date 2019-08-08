@@ -7,14 +7,14 @@ def logout_attempt(info):
     session_token = data[1]
     logger = logging.getLogger(__name__)
 
-    login_file = read_file(RESOURCES+"loginaccounts.json")
+    login_file = read_file(get_file_directory()+"loginaccounts.json")
     if login_file:
         login_account = find_login_session(login_file, account_number, session_token)
         if login_account:
             # Reset session token to none
             login_account["session"] = ""
             try:
-                with open(RESOURCES+"loginaccounts.json", 'w') as f:
+                with open(get_file_directory()+"loginaccounts.json", 'w') as f:
                     json.dump(login_file, f, indent=4)
                 logger.info("Logout successful. Account: #{}".format(account_number))
                 return (1, "Successfully logged out")

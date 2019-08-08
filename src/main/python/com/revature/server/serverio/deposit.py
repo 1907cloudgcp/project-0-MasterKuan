@@ -13,12 +13,12 @@ def deposit_to_account(info):
         logger.warning("User sent empty session token")
         return (0, "Session error, please contact support")
 
-    login_file = read_file(RESOURCES + "loginaccounts.json")
+    login_file = read_file(get_file_directory() + "loginaccounts.json")
     if not login_file:
         logger.critical("loginaccounts.json file not found")
         return (0, "Server error, please contact support")
 
-    account_file = read_file(RESOURCES + "bankaccounts.json")
+    account_file = read_file(get_file_directory() + "bankaccounts.json")
     if not account_file:
         logger.critical("account_file.json file not found")
         return (0, "Server error, please contact support")
@@ -44,7 +44,7 @@ def deposit_to_account(info):
                 message = (1, "Deposit request of ${0:.2f} is too large.\nPending for approval".format(deposit_amount))
             finally:
                 try:
-                    with open(RESOURCES + "bankaccounts.json", 'w') as account_write:
+                    with open(get_file_directory() + "bankaccounts.json", 'w') as account_write:
                         json.dump(account_file, account_write, indent=4)
                     return message
                 except FileNotFoundError:
