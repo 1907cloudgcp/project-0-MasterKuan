@@ -1,6 +1,8 @@
 import pickle
 import socket
 
+HOST = "localhost"
+PORT = 6969
 sock = None
 
 
@@ -9,7 +11,7 @@ def connect():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     try:
-        server_address = ("localhost", 10000)
+        server_address = (HOST, PORT)
         print("Connecting to {} port {}".format(*server_address))
         sock.connect(server_address)
         return sock

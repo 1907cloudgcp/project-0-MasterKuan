@@ -1,7 +1,8 @@
 import socket
 from serverio.redirect import *
 
-PORT = 10000
+HOST = "localhost"
+PORT = 6969
 
 
 def run_server():
@@ -10,7 +11,7 @@ def run_server():
     logger.info("Server started up")
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = ("localhost", PORT)
+    server_address = (HOST, PORT)
     sock.bind(server_address)
     sock.listen(1)
 
