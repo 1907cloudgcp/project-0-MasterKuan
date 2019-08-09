@@ -3,7 +3,7 @@
         "account": 1,
         "firstname": "Ryan",
         "lastname": "Kuan",
-        "balance": "550.00",
+        "balance": "150.00",
         "transactions": [
             [
                 "Deposit",
@@ -20,9 +20,13 @@
             [
                 "Transferred out",
                 "40.00"
+            ],
+            [
+                "Withdraw",
+                "400.00"
             ]
         ],
-        "session": "9hpPTLNsGyfr4aHt"
+        "session": "8gVnoW8QiFpz7Sxt"
     },
     {
         "account": 2,
@@ -81,5 +85,13 @@
         "balance": "0.00",
         "transactions": [],
         "session": "rJaDyNDuwCj1fOCc"
+    },
+    {
+        "account": 6,
+        "firstname": "Ryan",
+        "lastname": "me",
+        "balance": "0.00",
+        "transactions": [],
+        "session": "C7FuZRA4B5NiGSoX"
     }
 ]

@@ -14,7 +14,7 @@
         "username": "ryry",
         "salt": "MCeERR1mjDqxwGtK",
         "password": "63495c3b4fdf9c4d688d6186eaf6e5d2bdd45e625beb6cc9d99c6a9d7cce2fad",
-        "attempts": 6,
+        "attempts": 3,
         "session": ""
     },
     {
@@ -44,6 +44,16 @@
         "username": "R",
         "salt": "6LNq38dsaxMCN35W",
         "password": "8ed2779dfea33eb3fe40b584e1f14c00c6eea3de2a2c22d4788cf1ea9bff3bf3",
+        "attempts": 0,
+        "session": ""
+    },
+    {
+        "account": 6,
+        "firstname": "Ryan",
+        "lastname": "me",
+        "username": "me",
+        "salt": "JcPmKsIBYXN6Gea8",
+        "password": "90820558641d1a720656959528bdd82ce386d01373e8b8eed8957702862164c9",
         "attempts": 0,
         "session": ""
     }

@@ -7,7 +7,8 @@ def deposit_to_account(info):
     account_number = int(user_data[0])
     session_token = user_data[1]
     deposit_amount = float(user_data[2])
-    logger = logging.getLogger(__name__)
+    client_configurer()
+    logger = logging.getLogger("Server")
 
     if session_token == "":
         logger.warning("User sent empty session token")
@@ -44,7 +45,7 @@ def deposit_to_account(info):
                 message = (1, "Deposit request of ${0:.2f} is too large.\nPending for approval".format(deposit_amount))
             finally:
                 try:
-                    with open(get_file_directory()+"bankaccounts.json", 'w') as account_write:
+                    with open(get_file_directory() + "bankaccounts.json", 'w') as account_write:
                         json.dump(account_file, account_write, indent=4)
                     return message
                 except FileNotFoundError:

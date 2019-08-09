@@ -1,6 +1,4 @@
 import logging
-import pickle
-
 from .accountcreator import create_account_attempt
 from .balance import view_balance
 from .deposit import deposit_to_account
@@ -8,13 +6,13 @@ from .getallinfo import get_all_info
 from .loginauthenticator import login_attempt
 from .logout import logout_attempt
 from .transactions import view_transactions
-from .withdraw import withdraw_from_account
 from .transferfunds import transfer_funds
+from .withdraw import withdraw_from_account
 
 
 def process_data(data):
     flag = data[0]
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger("Server")
 
     if flag == "login":
         output = login_attempt(data[1])
@@ -37,5 +35,4 @@ def process_data(data):
     else:
         logger.warning("Unhandled flag. Flag: {}, Redirect Data: {}".format(flag, data[1]))
         output = (0, "Server error, please contact support")
-
-    return pickle.dumps(output)
+    return output

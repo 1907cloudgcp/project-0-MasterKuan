@@ -1,6 +1,8 @@
 import logging.handlers
+import multiprocessing
 from multiprocessing.connection import Listener
 from serverio.redirect import *
+
 
 HOST = "localhost"
 PORT = 6969
@@ -16,8 +18,9 @@ def client_configurer(queue):
 def client_handler(sock, listener, queue, configurer):
     configurer(queue)
     logger = logging.getLogger("Server")
+
     try:
-        logger.info("Connection from {}".format(listener.address))
+        logger.log(logging.INFO, "Connection from {}".format(listener.address))
         while True:
             packet = sock.recv()
             if packet:
@@ -41,7 +44,8 @@ def run_server(queue):
     server_address = (HOST, PORT)
     listener = Listener(server_address)
 
-    sock = listener.accept()
-    client_handler(sock, listener, queue, client_configurer)
-    logger.info("Server shutting down")
-    sock.close()
+    while True:
+        sock = listener.accept()
+        process = multiprocessing.Process(target=client_handler, args=(sock, listener, queue, client_configurer))
+        process.daemon = True
+        process.start()

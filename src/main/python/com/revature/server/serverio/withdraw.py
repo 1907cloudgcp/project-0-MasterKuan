@@ -7,18 +7,18 @@ def withdraw_from_account(info):
     account_number = int(user_data[0])
     session_token = user_data[1]
     withdraw_amount = float(user_data[2])
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger("Server")
 
     if session_token == "":
         logger.warning("User sent empty session token")
         return (0, "Session error, please contact support")
 
-    login_file = read_file(get_file_directory()+"loginaccounts.json")
+    login_file = read_file(get_file_directory() + "loginaccounts.json")
     if not login_file:
         logger.critical("loginaccounts.json file not found")
         return (0, "Server error, please contact support")
 
-    account_file = read_file(get_file_directory()+"bankaccounts.json")
+    account_file = read_file(get_file_directory() + "bankaccounts.json")
     if not account_file:
         logger.critical("account_file.json file not found")
         return (0, "Server error, please contact support")
@@ -34,7 +34,7 @@ def withdraw_from_account(info):
 
             try:
                 if withdraw_amount >= 1000:
-                    raise(LargeWithdrawal(account_number, withdraw_amount, "Large withdrawal requested"))
+                    raise (LargeWithdrawal(account_number, withdraw_amount, "Large withdrawal requested"))
                 balance -= withdraw_amount
                 account["balance"] = "{0:.2f}".format(balance)
                 account["transactions"].append(["Withdraw", "{0:.2f}".format(withdraw_amount)])
@@ -44,10 +44,11 @@ def withdraw_from_account(info):
             except LargeWithdrawal as error:
                 logger.info(error.formatted_message())
                 account["transactions"].append(["Pending Withdrawal", "{0:.2f}".format(withdraw_amount)])
-                message = (1, "Withdrawal request of ${0:.2f} is too large.\nPending for approval".format(withdraw_amount))
+                message = (
+                1, "Withdrawal request of ${0:.2f} is too large.\nPending for approval".format(withdraw_amount))
             finally:
                 try:
-                    with open(get_file_directory()+"bankaccounts.json", 'w') as account_write:
+                    with open(get_file_directory() + "bankaccounts.json", 'w') as account_write:
                         json.dump(account_file, account_write, indent=4)
                     return message
                 except FileNotFoundError:

@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 import os
+
 from controller.run import run_app
-from service.client import connect
+from service.client import connect, send_info
 
 
 def run_client_driver():
     sock = connect()
     if sock:
         run_app()
+        send_info("", "")
         sock.close()
 
 

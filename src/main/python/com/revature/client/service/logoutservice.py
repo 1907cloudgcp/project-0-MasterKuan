@@ -10,4 +10,3 @@ def logout_service(session):
     if flag == 0:
         return 0
     return 1
-
