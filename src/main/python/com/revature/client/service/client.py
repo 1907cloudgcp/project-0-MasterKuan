@@ -1,7 +1,7 @@
 from multiprocessing.connection import Client
 
 HOST = "localhost"
-PORT = 6969
+PORT = 4334
 sock = None
 
 

@@ -33,6 +33,7 @@ def run_server_driver(server_type):
     set_file_directory("resources/")
     queue = multiprocessing.Queue(-1)
     listener = multiprocessing.Process(target=logger_process, args=(queue, listener_configurer))
+    listener.daemon = True
     listener.start()
 
     if server_type == "1":
@@ -57,5 +58,6 @@ if __name__ == '__main__':
                 print("Enter a 1 or 2")
             else:
                 run_server_driver(option)
+                break
     else:
         run_server_driver(sys.argv[1])

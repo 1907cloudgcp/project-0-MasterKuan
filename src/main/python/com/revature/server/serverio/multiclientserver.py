@@ -3,9 +3,8 @@ import multiprocessing
 from multiprocessing.connection import Listener
 from serverio.redirect import *
 
-
 HOST = "localhost"
-PORT = 6969
+PORT = 4334
 
 
 def client_configurer(queue):
@@ -20,7 +19,7 @@ def client_handler(sock, listener, queue, configurer):
     logger = logging.getLogger("Server")
 
     try:
-        logger.log(logging.INFO, "Connection from {}".format(listener.address))
+        logger.info("Connection from {}".format(listener.address))
         while True:
             packet = sock.recv()
             if packet:
@@ -30,15 +29,13 @@ def client_handler(sock, listener, queue, configurer):
                 logger.info("No data from {}".format(listener.address))
                 break
     finally:
-        logger.info("Client disconnected")
+        logger.info("Client {} disconnected".format(listener.address))
         sock.close()
 
 
 def run_server(queue):
-    handler = logging.handlers.QueueHandler(queue)
+    client_configurer(queue)
     logger = logging.getLogger("Server")
-    logger.addHandler(handler)
-    logger.setLevel(logging.DEBUG)
     logger.info("Server started up")
 
     server_address = (HOST, PORT)
