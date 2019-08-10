@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 import os
-
 from controller.run import run_app
 from service.client import connect, send_info
+
+
+def main():
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    run_client_driver()
 
 
 def run_client_driver():
@@ -14,5 +18,4 @@ def run_client_driver():
 
 
 if __name__ == '__main__':
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    run_client_driver()
+    main()

@@ -10,6 +10,11 @@ from serverio.multiclientserver import run_server as multi_client
 from serverio.server import run_server as single_client
 
 
+def main(server_type):
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    run_server_driver(server_type)
+
+
 def listener_configurer():
     logging.basicConfig(level=logging.DEBUG, filename="resources/serverlog.log",
                         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
@@ -47,7 +52,6 @@ def run_server_driver(server_type):
 
 
 if __name__ == '__main__':
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     if len(sys.argv) < 2:
         while True:
             print("Requires server type\n"
@@ -57,7 +61,7 @@ if __name__ == '__main__':
             if not option == "1" and not option == "2":
                 print("Enter a 1 or 2")
             else:
-                run_server_driver(option)
+                main(option)
                 break
     else:
-        run_server_driver(sys.argv[1])
+        main(sys.argv[1])
