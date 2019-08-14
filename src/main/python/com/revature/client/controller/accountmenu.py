@@ -5,6 +5,7 @@ from service.logoutservice import logout_service
 from service.transferservice import transfer_service
 from service.viewbalance import balance_service
 from service.viewtransactions import transaction_service
+from service.changepasswordservice import password_service
 
 
 # Run until logout
@@ -26,6 +27,8 @@ def run_account_menu(session):
             get_all_service(session)
         elif action == 6:
             transfer_service(session)
+        elif action == 7:
+            password_service(session)
 
 
 # Get user input until valid input
@@ -38,6 +41,7 @@ def account_menu():
               "    4) History\n"
               "    5) Full account details\n"
               "    6) Transfer funds\n"
+              "    7) Change password\n"
               "    0) Logout")
         user_input = input("Input: ").lower()
         action = parse_account_menu(user_input)
@@ -67,6 +71,9 @@ def parse_account_menu(action):
     elif action == "transfer" or action == "6" or action == "t":
         print("\nTransfer money to a different account")
         return 6
+    elif action == "change" or action == "7" or action == "c":
+        print("\nChange password")
+        return 7
     else:
         print("\nInput was not recognized.")
         return 999

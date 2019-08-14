@@ -5,7 +5,6 @@ def view_balance(info):
     data = info.split()
     account_number = int(data[0])
     session_token = data[1]
-    client_configurer()
     logger = logging.getLogger("Server")
 
     if session_token == "":

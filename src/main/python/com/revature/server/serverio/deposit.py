@@ -7,7 +7,6 @@ def deposit_to_account(info):
     account_number = int(user_data[0])
     session_token = user_data[1]
     deposit_amount = float(user_data[2])
-    client_configurer()
     logger = logging.getLogger("Server")
 
     if session_token == "":

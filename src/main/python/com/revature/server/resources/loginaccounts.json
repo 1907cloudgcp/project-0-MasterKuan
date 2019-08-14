@@ -2,8 +2,8 @@
     {
         "account": 1,
         "username": "Ryan",
-        "salt": "skVJ31MuWqvmuIRE",
-        "password": "33f2e27f5f982ec097ea528716ccc418bbf4b8a11786ea03672cffacee29331c",
+        "salt": "ocnC8XC5TGkDB7Ko",
+        "password": "6026d2e55e3d29cbcd5c329377757c97134a47c223496f21931324a4031e9704",
         "attempts": 0,
         "session": ""
     },
@@ -54,6 +54,16 @@
         "username": "me",
         "salt": "JcPmKsIBYXN6Gea8",
         "password": "90820558641d1a720656959528bdd82ce386d01373e8b8eed8957702862164c9",
+        "attempts": 0,
+        "session": ""
+    },
+    {
+        "account": 7,
+        "firstname": "R",
+        "lastname": "K",
+        "username": "username",
+        "salt": "daYpUTFdPypCWhD3",
+        "password": "5fd135ab5548ad9b742bd099454b86686cd59df24070c43231dbc2f821e8469b",
         "attempts": 0,
         "session": ""
     }

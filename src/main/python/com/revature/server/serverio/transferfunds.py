@@ -58,11 +58,11 @@ def transfer_funds(info):
 
             user_balance -= transfer_amount
             user_account["balance"] = "{0:.2f}".format(user_balance)
-            user_account["transactions"].append(["Transferred out", "{0:.2f}".format(transfer_amount)])
+            user_account["transactions"].append(["Transferred Out", "{0:.2f}".format(transfer_amount)])
 
             deposit_balance += transfer_amount
             deposit_account["balance"] = "{0:.2f}".format(deposit_balance)
-            deposit_account["transactions"].append(["Transferred in", "{0:.2f}".format(transfer_amount)])
+            deposit_account["transactions"].append(["Transferred In", "{0:.2f}".format(transfer_amount)])
 
             try:
                 with open(get_file_directory() + "bankaccounts.json", 'w') as account_write:

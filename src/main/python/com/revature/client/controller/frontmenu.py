@@ -1,4 +1,4 @@
-from controller.settingsmenu import run_settings_menu, get_hide
+from controller.settingsmenu import run_settings_menu
 from service.createaccount import *
 from service.loginservice import *
 
@@ -12,7 +12,7 @@ def run_front_menu():
         elif action == 1:
             create_new_account()
         elif action == 2:
-            session = login_service(get_hide())
+            session = login_service()
             if session:
                 print("Logged in successfully")
                 return session

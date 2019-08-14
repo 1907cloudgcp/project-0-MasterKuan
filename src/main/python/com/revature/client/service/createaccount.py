@@ -1,15 +1,16 @@
 from hashlib import sha256
-
+from getpass import getpass
+from controller.settingsmenu import get_hide
 from service.client import send_info
 
 
 def create_new_account():
-    first_name = get_non_blank("First name")
-    last_name = get_non_blank("Last name")
+    first_name = get_non_blank("First name", False)
+    last_name = get_non_blank("Last name", False)
 
     while True:
-        username = get_non_blank("Username")
-        password = get_non_blank("Password")
+        username = get_non_blank("Username", False)
+        password = get_non_blank("Password", get_hide())
 
         hashed_password = sha256(password.encode('ascii')).hexdigest()
         reply = send_info("create", "{} {} {} {}".format(first_name, last_name, username, hashed_password))
@@ -32,10 +33,15 @@ def create_new_account():
             return 1
 
 
-def get_non_blank(field):
+def get_non_blank(field, hide):
     while True:
-        answer = input("{}: ".format(field))
+        if hide:
+            answer = getpass("{}: ".format(field))
+        else:
+            answer = input("{}: ".format(field))
         if answer == "":
             print("No input recieved for {}".format(field))
+        if " " in answer:
+            print("No spaces are allowed")
         else:
             return answer

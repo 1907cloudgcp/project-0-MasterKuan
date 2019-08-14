@@ -11,7 +11,6 @@ def create_account_attempt(info):
     last_name = data[1]
     username = data[2]
     password = data[3]
-    client_configurer()
     logger = logging.getLogger("Server")
 
     login_file = read_file(get_file_directory() + "loginaccounts.json")
