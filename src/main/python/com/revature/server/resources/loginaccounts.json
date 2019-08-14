@@ -1,3 +1,12 @@
 [
-
+    {
+        "account": 1,
+        "firstname": "Ryan",
+        "lastname": "Kuan",
+        "username": "ry",
+        "salt": "bDD5sZIt13AcHxI0",
+        "password": "8e446c588029a46315e5a3dc24bbad48105491df8e8e7648e4b30166d4fffb64",
+        "attempts": 0,
+        "session": ""
+    }
 ]

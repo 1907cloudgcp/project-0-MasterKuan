@@ -7,8 +7,11 @@ def transfer_funds(info):
     session_token = data[1]
     deposit_account_number = int(data[2])
     transfer_amount = float(data[3])
-
     logger = logging.getLogger("Server")
+
+    if account_number == deposit_account_number:
+        logger.info("Attempting to transfer money to self")
+        return (0, "Cannot transfer money to self")
 
     if session_token == "":
         logger.warning("User sent empty session token")
