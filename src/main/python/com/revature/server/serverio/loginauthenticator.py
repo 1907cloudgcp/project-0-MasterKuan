@@ -72,6 +72,9 @@ def login_attempt(info):
                     return (0, "Incorrect password")
         logger.warning("Account doesn't exist. Username: {}".format(username))
         return (0, "Account doesn't exist")
+    elif login_file == []:
+        logger.warning("Login file is empty")
+        return (0, "Account doesn't exist")
     else:
         logger.critical("Login file not found")
         return (0, "Server error, please contact support")

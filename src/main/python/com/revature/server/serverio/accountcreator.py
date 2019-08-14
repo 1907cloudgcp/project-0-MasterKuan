@@ -15,7 +15,7 @@ def create_account_attempt(info):
 
     login_file = read_file(get_file_directory() + "loginaccounts.json")
 
-    if login_file:
+    if login_file or login_file == []:
         for acc in login_file:
             if acc["username"] == username:
                 logger.info("Username is unavailable. Username: {}".format(username))
@@ -24,7 +24,10 @@ def create_account_attempt(info):
         logger.info("{} username available".format(username))
         try:
             with open(get_file_directory() + "loginaccounts.json", 'w') as accounts_write:
-                account_num = login_file[-1]["account"] + 1
+                if login_file == []:
+                    account_num = 1
+                else:
+                    account_num = login_file[-1]["account"] + 1
                 salt = ''.join(random.choice(ALPHANUMERIC) for i in range(16))
                 salt_n_hashed = sha256((password + salt).encode('ascii')).hexdigest()
                 login_file.append({"account": account_num,
@@ -41,7 +44,7 @@ def create_account_attempt(info):
             return (0, "Server error, please contact support")
 
         account_file = read_file(get_file_directory() + "bankaccounts.json")
-        if account_file:
+        if account_file or account_file == []:
             account_file.append({"account": account_num, "firstname": first_name, "lastname": last_name,
                                  "balance": "0.00", "transactions": [], "session": ""})
         else:
