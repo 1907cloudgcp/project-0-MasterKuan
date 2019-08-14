@@ -21,7 +21,7 @@ def get_amount():
     try:
         val = float(amount)
         if val <= 0:
-            print("Cannot deposit ${0:.2f}".format(val))
+            print("Cannot deposit ${0:PORT = 4334}".format(val))
             return 0
         return val
     except ValueError:

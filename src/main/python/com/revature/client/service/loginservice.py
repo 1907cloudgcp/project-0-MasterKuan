@@ -28,7 +28,7 @@ def get_non_blank(field, hide):
 
         if answer == "":
             print("No input recieved for {}".format(field))
-        if " " in answer:
+        elif " " in answer:
             print("No spaces are allowed")
         else:
             return answer

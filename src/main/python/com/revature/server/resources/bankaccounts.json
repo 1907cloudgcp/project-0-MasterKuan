@@ -1,35 +1,3 @@
 [
-    {
-        "account": 1,
-        "firstname": "Ryan",
-        "lastname": "Kuan",
-        "balance": "541.00",
-        "transactions": [
-            [
-                "Pending Deposit",
-                "1000.00"
-            ],
-            [
-                "Deposit",
-                "500.00"
-            ],
-            [
-                "Transferred Out",
-                "40.00"
-            ],
-            [
-                "Transferred In",
-                "40.00"
-            ],
-            [
-                "Transferred Out",
-                "1.00"
-            ],
-            [
-                "Transferred In",
-                "1.00"
-            ]
-        ],
-        "session": "zxN4Vio2YL63eRX9"
-    }
+
 ]
